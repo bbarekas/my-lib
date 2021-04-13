@@ -4,18 +4,20 @@ cmake_minimum_required(VERSION 2.8.0)
 
 project (hello)
 
+set(CMAKE_VERBOSE_MAKEFILE ON)
+#option (BUILD_TESTS "Build test projects." ON)
+
 #Generate the shared library from the sources
 file(GLOB MYSOURCES "src/*.c")
 add_library(mylib SHARED ${MYSOURCES})
 
-include_directories(include)
-
-add_executable(simple_test tests/simple_test.c)
-target_link_libraries(simple_test mylib)
-
-add_executable(simple_test_cpp tests/simple_test.cpp)
-target_link_libraries(simple_test_cpp mylib)
-
 add_executable(hello hello.cpp)
+
+add_subdirectory (examples)
+
+#if (${BUILD_TESTS})
+add_subdirectory (tests)
+# endif ()
+
 
 install(TARGETS mylib DESTINATION /usr/lib)
