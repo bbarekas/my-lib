@@ -5,9 +5,40 @@
  *
  **/
 
+#include <stdio.h>
 #include "../include/mylib.h"
 
 int rand_seed = 10;
+
+/**
+ * Function with C-callback argument without context pointer.
+ *
+ * @param size
+ * @param fun
+ */
+void mylib_callback(int size, callback_t fun) {
+    printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    for (int i = 0; i < size; i++) {
+        fun(i);
+    }
+    printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+}
+
+/**
+ * Function with C-callback argument with data pointer for passing function state to
+ * to the function pointer.
+ *
+ * @param size
+ * @param fun
+ * @param data
+ */
+void mylib_callback_withdata(int size, callback_closure_t fun, void *data) {
+    printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    for (int i = 0; i < size; i++) {
+        fun(i, data);
+    }
+    printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+}
 
 /**
  * Produces a random number between 0 and 32767.
