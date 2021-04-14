@@ -7,3 +7,6 @@ target_link_libraries(c_example mylib)
 
 add_executable(cpp_example cpp_example.cpp)
 target_link_libraries(cpp_example mylib)
+
+add_executable(consumer consumer.cpp)
+target_link_libraries(consumer mylib)
