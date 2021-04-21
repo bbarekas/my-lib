@@ -4,11 +4,12 @@ cmake_minimum_required(VERSION 2.8.0)
 
 project (hello)
 
-set(CMAKE_VERBOSE_MAKEFILE ON)
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 #option (BUILD_TESTS "Build test projects." ON)
 
 #Generate the shared library from the sources
-file(GLOB MYSOURCES "src/*.c")
+file(GLOB MYSOURCES "src/*.c" "src/*.cpp")
+
 add_library(mylib SHARED ${MYSOURCES})
 
 add_executable(hello hello.cpp)

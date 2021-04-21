@@ -9,6 +9,14 @@
 #define MYLIB_H
 
 #ifdef __cplusplus
+#include <functional> // std::function container
+
+// Callback C++ function without context pointer
+typedef std::function<void(uint32_t)> callback_cpp_t;
+
+// mylib_callback
+extern void mylib_callback_cpp(int size, callback_cpp_t fun);
+
 extern "C" {
 #endif
 
