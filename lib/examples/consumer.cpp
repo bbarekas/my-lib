@@ -8,18 +8,6 @@
 
 #include "mylib.h"
 
-#if 0
-using callback_t         = void (*) (int n);
-using callback_closure_t = void (*) (int n, void* context);
-
-// Functions with C-linkage
-#define EXTERN_C extern "C"
-
-/** Provided by the shared library (aka shared object on Unix-like systems) */
-EXTERN_C void dotimes_version1(int size, callback_t fun);
-EXTERN_C void dotimes_version2(int size, callback_closure_t fun, void* context);
-#endif
-
 using FunctionCallback1 = std::function<void (int )>;
 
 /** Namespace contains workarounds for passing capturing lambdas
@@ -57,7 +45,7 @@ namespace Workaround1 {
     *  to protect the callback global state. Only one callback can be
     *  passed per thread.
     */
-    void wrapper_to_dotimes_version1(int size, FunctionCallback1 func)
+    void wrapper_to_mylib_callback(int size, FunctionCallback1 func)
     {
         set_callback(func);
         mylib_callback(size, &workaround1_callback_adapter);
@@ -135,7 +123,7 @@ int main(int argc, char** argv)
         // Change from '0' to '1' to enable the compile-time error.
 #if 0
         // => Compile-time error!
-             dotimes_version1(5, lamb);
+        mylib_callback(5, lamb);
 #endif
 
     }
@@ -151,10 +139,10 @@ int main(int argc, char** argv)
         };
 
         std::puts("\n --->> Passing C++ capturing lambda ");
-        Workaround1::wrapper_to_dotimes_version1(5, lamb);
+        Workaround1::wrapper_to_mylib_callback(5, lamb);
 
         std::puts("\n --->> Passing function-object (aka C++ Functor) ");
-        Workaround1::wrapper_to_dotimes_version1(5, FunctionObject(25));
+        Workaround1::wrapper_to_mylib_callback(5, FunctionObject(25));
     }
 
     /* EXPERIMENT 4 - Passing capturing lambda to C-function pointer callbacks with
