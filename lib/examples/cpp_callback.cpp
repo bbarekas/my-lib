@@ -38,6 +38,18 @@ void string_callback1(const char * s) {
 }
 
 /**
+ * Classic callback of type vector_callback_cpp_t.
+ * @param v
+ */
+void vector_callback1(std::vector<const char *> v) {
+    printf(" > [Function vector] v = ");
+    for (const auto& s: v)
+        printf("%s ", s);
+    printf("\n");
+}
+
+
+/**
  * test_int_callback
  * Check mylib_int_callback_cpp
  */
@@ -82,12 +94,12 @@ void test_bool_callback() {
     });
 
     // Mutating lambda.
-    string text2 = "Home";
-    mylib_bool_callback_cpp(2, [&text2](bool b){
+    string text = "Home";
+    mylib_bool_callback_cpp(2, [&text](bool b){
         printf(" > [Lambda bool 2] b = %s \n", b ? "true":"false");
-        text2 = text2 + to_string(b);
+        text = text + to_string(b);
     });
-    printf(" Text: %s\n", text2.c_str());
+    printf(" Text: %s\n", text.c_str());
 
 }
 
@@ -106,12 +118,41 @@ void test_string_callback() {
     });
 
     // Mutating lambda.
-    string text3 = "Home";
-    mylib_string_callback_cpp(2, [&text3](const char * s){
-        printf(" > [Lambda string 2] %s = %s \n", text3.c_str(), s);
-        text3 = text3 + s;
+    string text = "Home";
+    mylib_string_callback_cpp(2, [&text](const char * s){
+        printf(" > [Lambda string 2] %s = %s \n", text.c_str(), s);
+        text = text + s;
     });
-    printf(" Text: %s\n", text3.c_str());
+    printf(" Text: %s\n", text.c_str());
+}
+
+/**
+ * test_vector_callback
+ * Check mylib_vector_callback_cpp
+ */
+void test_vector_callback() {
+
+    // Classic Function.
+    mylib_vector_callback_cpp(2, vector_callback1);
+
+    // Non-capturing lambda.
+    mylib_vector_callback_cpp(2, [](std::vector<const char *> v){
+        printf(" > [Lambda vector 1] v = ");
+        for (const auto& s: v)
+            printf("%s ", s);
+        printf("\n");
+    });
+
+    // Mutating lambda.
+    string text = "Home";
+    mylib_vector_callback_cpp(2, [&text](std::vector<const char *> v){
+        v.push_back(text.c_str());
+        printf(" > [Lambda vector 1] v = ");
+        for (const auto& s: v)
+            printf("%s ", s);
+        printf("\n");
+    });
+
 }
 
 
@@ -129,6 +170,9 @@ int main() {
 
     // Check mylib_string_callback_cpp
     test_string_callback();
+
+    // Check mylib_vector_callback_cpp
+    test_vector_callback();
 
     return 0;
 }

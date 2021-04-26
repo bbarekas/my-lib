@@ -10,6 +10,7 @@
 
 #ifdef __cplusplus
 #include <functional> // std::function container
+#include <vector>
 
 // Callback types.
 
@@ -22,6 +23,9 @@ typedef std::function<void(bool)> bool_callback_cpp_t;
 // Callback C++ function with string.
 typedef std::function<void(const char *)> string_callback_cpp_t;
 
+// Callback C++ function with vector.
+typedef std::function<void(std::vector<const char *>)> vector_callback_cpp_t;
+
 
 // Callback registers.
 
@@ -33,6 +37,10 @@ extern void mylib_bool_callback_cpp(int repeat, bool_callback_cpp_t cb);
 
 // mylib_string_callback_cpp
 extern void mylib_string_callback_cpp(int repeat, string_callback_cpp_t cb);
+
+// mylib_vector_callback_cpp
+extern void mylib_vector_callback_cpp(int repeat, vector_callback_cpp_t cb);
+
 
 
 extern "C" {

@@ -58,3 +58,26 @@ void mylib_string_callback_cpp(int repeat, string_callback_cpp_t cb) {
     }
     std::printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
 }
+
+/**
+ * Function with std::function callback argument
+ * std::function<void(std::vector<const char *>)>
+ *
+ * @param repeat
+ * @param cb
+ */
+void mylib_vector_callback_cpp(int repeat, vector_callback_cpp_t cb) {
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+
+    std::vector<const char *> v;
+
+    v.push_back("one");
+    v.push_back("two");
+    v.push_back("three");
+
+    for (int i = 0; i < repeat; i++) {
+        cb(v);
+    }
+
+    std::printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+}
