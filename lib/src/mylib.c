@@ -6,9 +6,10 @@
  **/
 
 #include <stdio.h>
+#include <time.h>
 #include "../include/mylib.h"
 
-int rand_seed = 10;
+int rand_seed = 75222929;
 
 /**
  * Function with C-callback argument without context pointer.
@@ -16,12 +17,12 @@ int rand_seed = 10;
  * @param size
  * @param fun
  */
-void mylib_callback(int size, callback_t fun) {
-    printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+void mylib_callback(int size, callback_t cb) {
+    printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
     for (int i = 0; i < size; i++) {
-        fun(i);
+        cb(i);
     }
-    printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+    printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
 }
 
 /**
@@ -32,12 +33,12 @@ void mylib_callback(int size, callback_t fun) {
  * @param fun
  * @param data
  */
-void mylib_callback_withdata(int size, callback_closure_t fun, void *data) {
-    printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+void mylib_callback_withdata(int size, callback_closure_t cb, void *data) {
+    printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
     for (int i = 0; i < size; i++) {
-        fun(i, data);
+        cb(i, data);
     }
-    printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+    printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
 }
 
 /**
@@ -46,7 +47,7 @@ void mylib_callback_withdata(int size, callback_closure_t fun, void *data) {
  * @return
  */
 int mylib_rand() {
-    rand_seed = rand_seed * 1103515245 + 12345;
+    rand_seed = rand_seed * 1103515245 + time(NULL) ;
     return (unsigned int) (rand_seed / 65536) % 32768;
 }
 

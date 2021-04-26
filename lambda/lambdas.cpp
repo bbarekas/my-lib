@@ -14,18 +14,18 @@
 
 static bool containsNut(std::string_view str) // static means internal linkage in this context
 {
-    //std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    //std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
 
     // std::string_view::find returns std::string_view::npos, which is a very large number,
     // if it doesn't find the substring.
     // Otherwise it returns the index where the substring occurs in str.
 
-    //std::printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+    //std::printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
     return (str.find("nut") != std::string_view::npos);
 }
 
 int caseNoLambda() {
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
 
     constexpr
     std::array<std::string_view, 4> arr{"apple", "banana", "walnut", "lemon"};
@@ -39,12 +39,12 @@ int caseNoLambda() {
         std::cout << "Found " << *found << '\n';
     }
 
-    std::printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
     return 0;
 }
 
 int caseLambda() {
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
 
     constexpr
     std::array<std::string_view, 4> arr{"apple", "banana", "walnut", "lemon"};
@@ -62,7 +62,7 @@ int caseLambda() {
         std::cout << "Found " << *found << '\n';
     }
 
-    std::printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
     return 0;
 }
 
@@ -86,13 +86,13 @@ int caseLambdaLocal() {
         std::cout << "Found " << *found << '\n';
     }
 
-    std::printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
     return 0;
 }
 
 
 int caseLambdaMutable() {
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
 
     int ammo{10};
 
@@ -108,7 +108,7 @@ int caseLambdaMutable() {
 
     std::cout << ammo << " shot(s) left\n";
 
-    std::printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
     return 0;
 }
 
@@ -119,7 +119,7 @@ struct Car {
 
 
 int caseLambdaReference() {
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
 
     std::array<Car, 3> cars{{{"Volkswagen", "Golf"},
                                     {"Toyota", "Corolla"},
@@ -142,12 +142,12 @@ int caseLambdaReference() {
         std::cout << car.make << ' ' << car.model << '\n';
     }
 
-    std::printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
     return 0;
 }
 
 int caseLambdaDefaultValue() {
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
 
     std::array areas{100, 25, 121, 40, 56};
 
@@ -168,12 +168,12 @@ int caseLambdaDefaultValue() {
         std::cout << "Area found :)\n";
     }
 
-    std::printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
     return 0;
 }
 
 int caseLambdaVariable() {
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
 
     std::array areas{100, 25, 121, 40, 56};
 
@@ -198,7 +198,7 @@ int caseLambdaVariable() {
         std::cout << "Area found :)\n";
     }
 
-    std::printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
     return 0;
 }
 
@@ -213,7 +213,7 @@ auto makeWalrus(const std::string& name)
 
 int caseLambdaUndefined()
 {
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
 
     // Create a new walrus whose name is Roofus.
     // sayName is the lambda returned by makeWalrus.
@@ -222,13 +222,13 @@ int caseLambdaUndefined()
     // Call the lambda function that makeWalrus returned.
     sayName();
 
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
     return 0;
 }
 
 int caseLambdaCopy()
 {
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
 
     int i{ 0 };
 
@@ -245,7 +245,7 @@ int caseLambdaCopy()
     count();
     otherCount();
 
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
     return 0;
 }
 
@@ -256,7 +256,7 @@ void invoke(const std::function<void(void)>& fn)
 
 int caseLambdaInvoke()
 {
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
 
     int i{ 0 };
 
@@ -280,12 +280,12 @@ int caseLambdaInvoke()
     invoke(std::ref(count));
     invoke(std::ref(count));
 
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
     return 0;
 }
 
 int main() {
-    std::printf(" [TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <ENTRY> Called function: %s \n", __FUNCTION__);
 
     []() {}; // defines a lambda with no captures, no parameters, and no return type
 
@@ -444,5 +444,5 @@ int main() {
     std::cout << '\n';
     */
 
-    std::printf(" [TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
+    std::printf("[TRACE] <EXIT> Called function: %s \n", __FUNCTION__);
 }
