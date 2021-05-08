@@ -16,6 +16,14 @@ using namespace std;
  * Classic callback of type int_callback_cpp_t.
  * @param n
  */
+void int_callback0(int n) {
+    printf(" > [Function int] n = %d \n", n);
+}
+
+/**
+ * Classic callback of type int_callback_cpp_t.
+ * @param n
+ */
 void int_callback1(uint32_t n) {
     printf(" > [Function int] n = %d \n", n);
 }
@@ -51,6 +59,7 @@ void vector_callback1(std::vector<const char *> v) {
 
 /**
  * test_int_callback
+ *
  * Check mylib_int_callback_cpp
  */
 void test_int_callback() {
@@ -81,6 +90,7 @@ void test_int_callback() {
 
 /**
  * test_bool_callback
+ *
  * Check mylib_bool_callback_cpp
  */
 void test_bool_callback() {
@@ -105,6 +115,7 @@ void test_bool_callback() {
 
 /**
  * test_string_callback
+ *
  * Check mylib_string_callback_cpp
  */
 void test_string_callback() {
@@ -128,6 +139,7 @@ void test_string_callback() {
 
 /**
  * test_vector_callback
+ *
  * Check mylib_vector_callback_cpp
  */
 void test_vector_callback() {
@@ -155,9 +167,45 @@ void test_vector_callback() {
 
 }
 
+/**
+ * test_int_callback_run
+ *
+ * Registers a series of callback and then calls mylib_int_callback_run_cpp to execute all of them.
+ */
+void test_int_callback_run() {
+
+    // Classic Function/
+    mylib_int_callback_cpp(0, int_callback1);
+
+    /*
+    // Non-capturing lambda.
+    mylib_int_callback_cpp(0, [](int n){
+        printf(" > [Lambda int 1] n = %d \n", n);
+    });
+
+    // Capturing lambda.
+    string text = "Home";
+    mylib_int_callback_cpp(0, [=](int n){
+        printf(" > [Lambda int 2] %s = %d \n", text.c_str(), n);
+    });
+    printf(" Text: %s\n", text.c_str());
+
+    // Mutating lambda.
+    mylib_int_callback_cpp(0, [&text](int n){
+        printf(" > [Lambda int 3] %s = %d \n", text.c_str(), n);
+        text = text + to_string(n);
+    });
+    printf(" Text: %s\n", text.c_str());
+    */
+
+    // Run callbacks.
+    mylib_int_callback_run_cpp(1);
+}
+
 
 /**
  * Entry
+ *
  * @return
  */
 int main() {
@@ -173,6 +221,9 @@ int main() {
 
     // Check mylib_vector_callback_cpp
     test_vector_callback();
+
+    // Check mylib_int_callback_run_cpp
+    test_int_callback_run();
 
     return 0;
 }

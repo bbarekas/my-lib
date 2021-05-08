@@ -14,6 +14,12 @@
 
 // Callback types.
 
+// Callback function classic.
+typedef void (*callback_t) (int n);
+
+// Callback C++ function - generic.
+typedef std::function<void()> callback_cpp_t;
+
 // Callback C++ function with int.
 typedef std::function<void(uint32_t)> int_callback_cpp_t;
 
@@ -30,6 +36,9 @@ typedef std::function<void(std::vector<const char *>)> vector_callback_cpp_t;
 // Callback registers.
 
 // mylib_callback_cpp
+extern void mylib_old_callback_cpp(int repeat, callback_t cb);
+
+// mylib_callback_cpp
 extern void mylib_int_callback_cpp(int repeat, int_callback_cpp_t cb);
 
 // mylib_bool_callback_cpp
@@ -41,6 +50,8 @@ extern void mylib_string_callback_cpp(int repeat, string_callback_cpp_t cb);
 // mylib_vector_callback_cpp
 extern void mylib_vector_callback_cpp(int repeat, vector_callback_cpp_t cb);
 
+// mylib_int_callback_run_cpp
+extern void mylib_int_callback_run_cpp(int repeat);
 
 
 extern "C" {
